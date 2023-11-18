@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  become: true 
+  vars:
+    packages:
+      - git
+      - python
+      - ansible
+      - java
+      - docker
+  tasks:
+    - name: install of the package
+      yum:
+       name: "{{item}}"
+       state: present
+      with_items: "{{packages}}"
+    - name: docker up
+      service:
+       name: "{{packages[4]}}"
+       state: started
+
