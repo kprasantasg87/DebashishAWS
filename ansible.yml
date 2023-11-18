@@ -7,13 +7,17 @@
       - python
       - ansible
       - java
-      - docker
+
   tasks:
     - name: install of the package
       yum:
        name: "{{item}}"
        state: present
       with_items: "{{packages}}"
+    - name: docker up
+      yum:
+       name: docker
+       state: present
     - name: docker up
       service:
        name: "{{packages[4]}}"
